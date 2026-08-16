@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}List New Equipment{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width:720px; padding-top:40px; padding-bottom:60px;">
+  <div style="background:#ffffff; border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-lg); border: 1px solid var(--slate-200);">
+    
+    <div style="font-size: 0.8rem; font-weight: 800; color: var(--emerald-600); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;">
+      🚜 Machinery Owner Tools
+    </div>
+    <h1 style="color: #0f172a; font-size: 2.2rem; margin-bottom: 8px;">List New Machinery</h1>
+    <p style="color: #475569; font-size: 0.98rem; margin-bottom: 30px;">Publish your tractor, harvester, or farm tools to earn daily rental income from local farmers.</p>
+
+    <form method="POST" action="{{ url_for('equipment.create') }}" enctype="multipart/form-data">
+      
+      <div class="field-group">
+        <label for="name" style="color: #0f172a !important; font-weight: 700;">Equipment Name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Swaraj 744 FE 45HP Tractor" required value="{{ form_data.get('name','') }}" style="color: #0f172a !important; background: #ffffff !important; border: 1.5px solid #cbd5e1;">
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="category" style="color: #0f172a !important; font-weight: 700;">Category</label>
+          <select id="category" name="category" required style="color: #0f172a !important; background: #ffffff !important; border: 1.5px solid #cbd5e1; font-weight: 600;">
+            {% for c in categories %}
+              <option value="{{ c }}" style="color: #0f172a; background: #fff;">{{ c|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="brand" style="color: #0f172a !important; font-weight: 700;">Brand / Manufacturer</label>
+          <input type="text" id="brand" name="brand" placeholder="e.g. Mahindra, John Deere, VST Shakti" style="color: #0f172a !important; background: #ffffff !important; border: 1.5px solid #cbd5e1;">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="description" style="color: #0f172a !important; font-weight: 700;">Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Well-maintained, include details like horsepower, condition, or attached accessories..." style="color: #0f172a !important; background: #ffffff !important; border: 1.5px solid #cbd5e1;"></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="price_per_day" style="color: #0f172a !important; font-weight: 700;">Daily Price (₹ / day)</label>
+          <input type="number" id="price_per_day" name="price_per_day" min="1" step="1" placeholder="1200" required style="color: #0f172a !important; background: #ffffff !important; border: 1.5px solid #cbd5e1;">
+        </div>
+        <div class="field-group">
+          <label for="location" style="color: #0f172a !important; font-weight: 700;">Location (Village/District)</label>
+          <input type="text" id="location" name="location" placeholder="e.g. Pollachi, Coimbatore" required style="color: #0f172a !important; background: #ffffff !important; border: 1.5px solid #cbd5e1;">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="image" style="color: #0f172a !important; font-weight: 700;">Machinery Photo</label>
+        <input type="file" id="image" name="image" accept="image/*" style="color: #0f172a !important; background: #ffffff !important; border: 1.5px solid #cbd5e1; padding: 10px;">
+      </div>
+
+      <button type="submit" class="btn btn-amber btn-block btn-lg" style="margin-top: 10px;">⚡ Publish Machinery Listing</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

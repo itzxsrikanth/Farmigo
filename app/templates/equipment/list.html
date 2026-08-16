@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% from "partials/equipment_icons.html" import by_category %}
+{% block title %}Browse Equipment{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 40px; padding-bottom: 60px;">
+  <div class="section-title">
+    <div>
+      <div class="eyebrow" style="color: var(--emerald-600); font-weight: 800;">Direct Owner Marketplace</div>
+      <h2 style="color: #0f172a;">Browse Agricultural Machinery</h2>
+    </div>
+  </div>
+
+  <form method="GET" style="display:flex; gap:14px; margin:24px 0 40px; flex-wrap:wrap; background: #ffffff; padding: 22px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--slate-200);">
+    <div style="flex: 1; min-width: 200px;">
+      <label style="display:block; font-size: 0.82rem; font-weight:700; color: #1e293b; margin-bottom: 6px;">Category</label>
+      <select name="category" style="width: 100%; padding:12px; border-radius: var(--radius-md); border: 1.5px solid #cbd5e1; font-family: var(--font-body); color: #0f172a; background-color: #ffffff; font-weight: 600;">
+        <option value="" style="color: #0f172a; background: #fff;">All Categories</option>
+        {% for c in categories %}
+          <option value="{{ c }}" {% if c == selected_category %}selected{% endif %} style="color: #0f172a; background: #fff;">{{ c|capitalize }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div style="flex: 2; min-width: 240px;">
+      <label style="display:block; font-size: 0.82rem; font-weight:700; color: #1e293b; margin-bottom: 6px;">Location</label>
+      <input type="text" name="location" placeholder="Search by district or village (e.g. Coimbatore, Erode)" value="{{ location }}" style="width: 100%; padding:12px; border-radius: var(--radius-md); border: 1.5px solid #cbd5e1; font-family: var(--font-body); color: #0f172a; background-color: #ffffff; font-weight: 600;">
+    </div>
+
+    <div style="display:flex; align-items:flex-end;">
+      <button type="submit" class="btn btn-primary" style="padding: 12px 28px;">🔍 Search Equipment</button>
+    </div>
+  </form>
+
+  <div class="grid">
+    {% for item in items %}
+      <a class="card" href="{{ url_for('equipment.detail', equipment_id=item.id) }}">
+        <div class="thumb">
+          {% if item.image_filename %}
+            <img src="{{ url_for('static', filename='img/equipment/' ~ item.image_filename) }}" alt="{{ item.name }}">
+          {% else %}
+            {{ by_category(item.category, "equip-svg") }}
+          {% endif %}
+        </div>
+        <div class="body">
+          <div class="cat-tag">{{ item.category }}</div>
+          <h3 style="color: #0f172a !important; font-weight: 700;">{{ item.name }}</h3>
+          <div class="loc" style="color: #334155 !important;">📍 {{ item.location }} • {{ item.brand or 'Verified' }}</div>
+          <div class="price" style="color: #047857 !important;">₹{{ "%.0f"|format(item.price_per_day) }} <span style="color: #475569 !important;">/ day</span></div>
+        </div>
+      </a>
+    {% else %}
+      <p style="grid-column: 1 / -1; text-align: center; color: #475569; padding: 40px; font-weight: 600;">No equipment matches your search criteria.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

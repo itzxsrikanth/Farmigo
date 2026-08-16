@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Create account{% endblock %}
+
+{% block body %}
+<div class="auth-wrap">
+  <!-- Left Side: Photorealistic Visual Scene -->
+  <div class="auth-scene" style="background-image: linear-gradient(180deg, rgba(6, 78, 59, 0.45) 0%, rgba(15, 23, 42, 0.85) 100%), url('{{ url_for('static', filename='img/login_hero.png') }}'); background-size: cover; background-position: center;">
+    
+    <div class="brand-badge">
+      <span class="brand-icon">🌱</span>
+      <span class="brand-text">Farmigo Network</span>
+    </div>
+
+    <div class="caption">
+      <div class="badge-pill">🚜 Direct Farmer-to-Owner Marketplace</div>
+      <h2>List Once. Earn All Season. Rent on Demand.</h2>
+      <p>Equipment owners monetize idle machinery while farmers gain instant access to top-tier tractors and tools without heavy capital costs.</p>
+
+      <div class="hero-stats-grid">
+        <div class="stat-card">
+          <span class="stat-num">Fast</span>
+          <span class="stat-lbl">Daily Booking</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">Zero</span>
+          <span class="stat-lbl">Hidden Fees</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">Direct</span>
+          <span class="stat-lbl">Owner Contacts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Form Panel -->
+  <div class="auth-panel">
+    <div class="auth-card">
+      <div class="eyebrow">Get Started Today</div>
+      <h1>Create your account</h1>
+      <p class="sub">Join as a farmer looking to rent, or an owner listing equipment.</p>
+
+      <form method="POST" action="{{ url_for('auth.register') }}" class="auth-form">
+        <div class="role-toggle">
+          <label class="role-option">
+            <input type="radio" name="role" value="farmer" checked>
+            <div class="role-card-inner">
+              <span class="role-icon">🌾</span>
+              <span class="role-title">Farmer</span>
+              <span class="role-desc">Rent machinery</span>
+            </div>
+          </label>
+          <label class="role-option">
+            <input type="radio" name="role" value="owner">
+            <div class="role-card-inner">
+              <span class="role-icon">🚜</span>
+              <span class="role-title">Equipment Owner</span>
+              <span class="role-desc">List your tools</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <label for="full_name">Full Name</label>
+          <input type="text" id="full_name" name="full_name" placeholder="Ramesh Kumar" required value="{{ form_data.get('full_name', '') }}">
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required value="{{ form_data.get('email', '') }}">
+          </div>
+          <div class="field-group">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" placeholder="98765 43210" value="{{ form_data.get('phone', '') }}">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="village">Village / Town</label>
+            <input type="text" id="village" name="village" placeholder="Village name" value="{{ form_data.get('village', '') }}">
+          </div>
+          <div class="field-group">
+            <label for="district">District</label>
+            <input type="text" id="district" name="district" placeholder="District" value="{{ form_data.get('district', '') }}">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="At least 6 characters" required>
+          </div>
+          <div class="field-group">
+            <label for="confirm_password">Confirm password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account &rarr;</button>
+      </form>
+
+      <div class="auth-foot">
+        Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

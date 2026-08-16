@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top:40px; padding-bottom:60px;">
+  <div class="eyebrow" style="font-family:var(--font-mono); color:var(--crop-600); text-transform:uppercase; font-size:0.8rem;">Admin dashboard</div>
+  <h1>Platform overview</h1>
+  <div class="card" style="padding:24px; max-width:300px;">
+    <div class="cat-tag">Total equipment</div>
+    <div class="price" style="font-size:2rem;">{{ total_equipment }}</div>
+  </div>
+</div>
+{% endblock %}

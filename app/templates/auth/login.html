@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+
+{% block body %}
+<div class="auth-wrap">
+  <!-- Left Side: Photorealistic Visual Scene -->
+  <div class="auth-scene" style="background-image: linear-gradient(180deg, rgba(6, 78, 59, 0.45) 0%, rgba(15, 23, 42, 0.85) 100%), url('{{ url_for('static', filename='img/login_hero.png') }}'); background-size: cover; background-position: center;">
+    
+    <div class="brand-badge">
+      <span class="brand-icon">🌱</span>
+      <span class="brand-text">Farmigo Network</span>
+    </div>
+
+    <div class="caption">
+      <div class="badge-pill">✨ Modern Agricultural Equipment Network</div>
+      <h2>Empowering Farms with Heavy Machinery On Demand</h2>
+      <p>Rent high-performance tractors, combine harvesters, tillers, and drones directly from verified local equipment owners.</p>
+
+      <!-- Stats Floating Card -->
+      <div class="hero-stats-grid">
+        <div class="stat-card">
+          <span class="stat-num">1,200+</span>
+          <span class="stat-lbl">Active Machinery</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">4.9 ★</span>
+          <span class="stat-lbl">Farmer Rating</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">100%</span>
+          <span class="stat-lbl">Verified Owners</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Sleek Glass Form Panel -->
+  <div class="auth-panel">
+    <div class="auth-card">
+      <div class="eyebrow">Welcome Back</div>
+      <h1>Sign in to Farmigo</h1>
+      <p class="sub">Access your bookings, manage equipment listings, and track rentals.</p>
+
+      <!-- Quick Demo Login Helper Pills -->
+      <div class="demo-pills-box">
+        <span class="demo-title">Quick Demo Login:</span>
+        <div class="demo-btn-group">
+          <button type="button" class="btn-demo-pill" onclick="fillLogin('owner@example.com', 'password123')">
+            🚜 Owner Demo
+          </button>
+          <button type="button" class="btn-demo-pill" onclick="fillLogin('farmer@example.com', 'password123')">
+            🌾 Farmer Demo
+          </button>
+        </div>
+      </div>
+
+      <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
+        <div class="field-group">
+          <label for="email">Email address</label>
+          <div class="input-with-icon">
+            <span class="field-icon">✉️</span>
+            <input type="email" id="email" name="email" placeholder="name@example.com" required autofocus>
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="password">Password</label>
+          <div class="input-with-icon">
+            <span class="field-icon">🔒</span>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+          </div>
+        </div>
+        <div class="row-between">
+          <label class="checkbox-row">
+            <input type="checkbox" name="remember" checked> Keep me logged in
+          </label>
+          <a href="#" class="link-muted">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          Sign In to Dashboard &rarr;
+        </button>
+      </form>
+
+      <div class="auth-foot">
+        Don't have an account? <a href="{{ url_for('auth.register') }}">Create an account</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function fillLogin(email, password) {
+  document.getElementById('email').value = email;
+  document.getElementById('password').value = password;
+}
+</script>
+{% endblock %}

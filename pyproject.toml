@@ -1,3 +1,26 @@
+[project]
+name = "farmigo"
+version = "0.1.0"
+description = "Farmigo agricultural equipment rental platform"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "Flask>=3.0.0",
+    "Flask-SQLAlchemy>=3.1.1",
+    "Flask-Migrate>=4.0.7",
+    "Flask-Login>=0.6.3",
+    "Flask-WTF>=1.2.1",
+    "Flask-JWT-Extended>=4.6.0",
+    "Flask-Bcrypt>=1.0.1",
+    "Flask-Cors>=4.0.1",
+    "python-dotenv>=1.0.1",
+    "email-validator>=2.2.0",
+    "WTForms>=3.1.2",
+    "Pillow>=10.4.0",
+    "gunicorn>=22.0.0",
+    "psycopg2-binary>=2.9.9",
+]
+
 [tool.vercel]
 entrypoint = "run:app"
 

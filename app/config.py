@@ -8,9 +8,14 @@ class BaseConfig:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
     JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "dev-jwt-secret")
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=6)
-    db_url = os.environ.get(
-        "DATABASE_URL", f"sqlite:///{os.path.join(basedir, 'instance', 'agri_rental.db')}"
+    _default_db = (
+        "sqlite:////tmp/agri_rental.db"
+        if os.environ.get("VERCEL")
+        else f"sqlite:///{os.path.join(basedir, 'instance', 'agri_rental.db')}"
     )
+    db_url = os.environ.get("DATABASE_URL", _default_db)
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
     if db_url.startswith("sqlite:///"):
         db_url = "sqlite:///" + db_url[10:].replace("\\", "/")
     SQLALCHEMY_DATABASE_URI = db_url

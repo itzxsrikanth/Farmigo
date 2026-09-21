@@ -11,5 +11,5 @@ email-validator==2.2.0
 WTForms==3.1.2
 Pillow==10.4.0
 gunicorn==22.0.0
-streamlit>=1.30.0
-pandas>=2.0.0
+psycopg2-binary==2.9.9
+# Note: Streamlit & Pandas moved to requirements-streamlit.txt to prevent exceeding Vercel 250MB bundle size limit
